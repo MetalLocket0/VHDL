@@ -4,8 +4,8 @@ use ieee.numeric_std.all;
 
 entity mux8 is
   port (
-    S    : in std_logic;
-    flag : out std_logic_vector(23 downto 0));
+    S       : in std_logic;
+    max_out : out std_logic_vector(23 downto 0));
 end mux8;
 
 architecture behavioral of mux8 is
@@ -21,4 +21,5 @@ begin
       when (others => insignal <= MILISEC(7 downto 0));
     end case;
   end process;
+  max_out <= insignal;
 end behavioral;
