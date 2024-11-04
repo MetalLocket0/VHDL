@@ -26,15 +26,17 @@ begin
       end if;
     end if;
   end process;
-process (clk, reset_n) is 
-begin
+  process (clk, reset_n) is
+  begin
     if (reset_n = '0') then
-    flag <= '0'; 
+      flag <= '0';
 
     elsif (clk'event and clk = '1') then
-        if (max_value =) then
-            
-        end if ;
-        
-    end if ;
-end process;
+      if (count = max_value) then
+        flag <= '1';
+        else
+          flag <= '0';
+      end if;
+    end if;
+  end process;
+  end delays;
