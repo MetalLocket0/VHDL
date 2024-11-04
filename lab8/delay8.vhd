@@ -34,9 +34,9 @@ begin
     elsif (clk'event and clk = '1') then
       if (count = max_value) then
         flag <= '1';
-        else
-          flag <= '0';
+      else
+        flag <= '0';
       end if;
     end if;
   end process;
-  end delays;
+end delays;
