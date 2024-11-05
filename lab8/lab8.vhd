@@ -13,7 +13,7 @@ end lab8;
 architecture behavior of lab8 is
   signal s1 : STD_LOGIC_VECTOR(23 downto 0);
   signal s2 : STD_LOGIC;
-  signal s3 : STD_LOGIC_VECTOR(10 downto 0);
+  signal s3 : STD_LOGIC_VECTOR(9 downto 0);
   
   component mux8 is
     port (
@@ -26,7 +26,7 @@ architecture behavior of lab8 is
     port (
       max_value    : in std_logic_vector(23 downto 0);
       clk, reset_n : in std_logic;
-      flag         : out std_logic;
+      flag         : out std_logic
     );
   end component;
 
@@ -38,9 +38,9 @@ architecture behavior of lab8 is
     );
   end component;
 
-  component binary2ssd is
+  component binary2ssd8 is
     port (
-      In_num : in std_logic_vector(7 downto 0);
+      In_num : in std_logic_vector(9 downto 0);
       HEX2   : out std_logic_vector(6 downto 0);
       HEX1   : out std_logic_vector(6 downto 0);
       HEX0   : out std_logic_vector(6 downto 0)
@@ -72,7 +72,7 @@ begin
       count_out => s3
   );
   
-  U4 : binary2ssd
+  U4 : binary2ssd8
    port map(
       In_num => s3,
       HEX2 => HEX2_MAIN,

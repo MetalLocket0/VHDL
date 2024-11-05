@@ -10,15 +10,15 @@ end mux8;
 
 architecture behavioral of mux8 is
   constant MILISEC : std_logic_vector(23 downto 0) := x"4C4B3F";
-  constant NANOSEC : std_logic_vector(7 downto 0)  := "00000100";
+  constant NANOSEC : std_logic_vector(23 downto 0)  := x"000004";
   signal insignal  : std_logic_vector(23 downto 0);
 
 begin
   sel_mux : process (S)
   begin
     case S is
-      when '0'     => insignal     <= NANOSEC(7 downto 0);
-      when (others => insignal <= MILISEC(7 downto 0));
+      when '0'     => insignal     <= NANOSEC;
+      when others => insignal <= MILISEC;
     end case;
   end process;
   max_out <= insignal;
