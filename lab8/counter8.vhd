@@ -28,7 +28,6 @@ begin
   if (clk'event and clk = '1') then
     if (reset_n = '0') then
       int_count <= (others => '0');
-    
 	 elsif (int_count = MAX_VAL) then 
 	  int_count <= (others => '0');
 	  end if;
