@@ -18,18 +18,18 @@ begin
 
   shifter : process (clk, reset_n)
   begin
-    if (reset_n = '0') then
-      shift <= (others => '0');
-    elsif (clk'event and clk = '1') then
-      if (load = '0') then
+    if (reset_n = '0') then --if the reset is 0 then make everything 0
+      shift <= (others => '0'); 
+    elsif (clk'event and clk = '1') then --else if rising clock edge
+      if (load = '0') then  --if the load is 0 then load the shifter
         shift <= parallel_in;
       else
-        if (r = '1') then
+        if (r = '1') then --if the input is 1 then shift to the right
           serial_out         <= shift(15);
           shift(15 downto 1) <= shift(14 downto 0); --shift to the right
           shift(0)           <= serial_in;
 
-        else
+        else --if the input is 0 then shift to the right
           serial_out         <= shift(0);
           shift(14 downto 0) <= shift(15 downto 1); --shift to the left
           shift(15)          <= serial_in;
@@ -39,11 +39,6 @@ begin
   end if;
 
 end process;
-parallel_out <= shift;
-
-if (r = '1') then
-  serial_out <= shift(15);
-else
-  serial_out <= shift(0);
+parallel_out <= shift; --give whatever shift gets after the process to parallel_out
 end if;
 end architecture;
