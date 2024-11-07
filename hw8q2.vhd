@@ -1,3 +1,7 @@
+--------------------------------------------------------
+--                Homework 8 Question 2               --
+--Kevin Leal, Cody Jones, Drew LaTerza, Tyler Remphrey--
+--------------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
