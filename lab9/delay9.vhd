@@ -11,9 +11,9 @@ entity delay9 is
 end delay9;
 
 architecture delays of delay8 is
-  signal count            : unsigned(23 downto 0);
+  signal count     : unsigned(23 downto 0);
   signal max_count : unsigned(23 downto 0);
-  begin
+begin
   max_count <= unsigned(max_value);
   process (clk, reset_n) is
   begin
