@@ -10,19 +10,19 @@ entity lab9 is
 end lab9;
 
 architecture behavior of lab9 is
-  signal s1 : std_logic_vector(23 downto 0);
+  signal s1 : std_logic_vector(27 downto 0);
   signal s2 : std_logic;
 
   component mux9
     port (
       S       : in std_logic;
-      mux_out : out std_logic
+      mux_out : out std_logic_vector(27 downto 0)
     );
   end component;
 
   component delay9
     port (
-      max_value : in std_logic_vector(23 downto 0);
+      max_value : in std_logic_vector(27 downto 0);
       clk       : in std_logic;
       reset_n   : in std_logic;
       flag      : out std_logic
@@ -67,7 +67,7 @@ begin
     HEX1   => HEX1_MAIN,
     HEX2   => HEX2_MAIN,
     HEX3   => HEX3_MAIN,
-    HEX4   => HEX4_MAIN
+    HEX4   => HEX4_MAIN,
     HEX5   => HEX5_MAIN
   );
-  end architecture;
+end architecture;

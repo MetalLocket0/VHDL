@@ -22,27 +22,27 @@ architecture basis of shifter9 is
   constant H     : std_logic_vector(6 downto 0) := "0001001";
   constant r     : std_logic_vector(6 downto 0) := "0101111";
   constant BLANK : std_logic_vector(6 downto 0) := "1111111";
-  type ssd_array_type is array (0 to 24) of std_logic_vector(6 downto 0);
+  type ssd_array_type is array (0 to 23) of std_logic_vector(6 downto 0);
   constant ssd_array_c : ssd_array_type := (I, C, E, BLANK, C, O, L, d, BLANK, S, O, d, A, BLANK, S, O, L, d, BLANK, H, E, r, E, BLANK);
-  signal shift         : ssd_array_type(0 to 24);
+  signal shift         : ssd_array_type;
 begin
   shifter : process (clk, rst)
   begin
     if (rst = '0') then
-      shift <= ssd_array_type;
+      shift <= ssd_array_c;
     elsif (rising_edge(clk)) then
       if (enable = '1') then
-        shift(24 downto 1) <= shift(23 downto 0);
-        shift(0)           <= shift(24);
+        shift(0 to 22) <= shift(1 to 23);
+        shift(0)       <= shift(23);
       else
-        shift <= ssd_array_type;
+        shift <= ssd_array_c;
       end if;
     end if;
   end process;
-  HEX5 <= shift(24);
-  HEX4 <= shift(23);
-  HEX3 <= shift(22);
-  HEX2 <= shift(21);
-  HEX1 <= shift(20);
-  HEX0 <= shift(19);
+  HEX5 <= shift(23);
+  HEX4 <= shift(22);
+  HEX3 <= shift(21);
+  HEX2 <= shift(20);
+  HEX1 <= shift(19);
+  HEX0 <= shift(18);
 end architecture;

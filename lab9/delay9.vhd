@@ -4,15 +4,15 @@ use ieee.numeric_std.all;
 
 entity delay9 is
   port (
-    max_value    : in std_logic_vector(23 downto 0);
+    max_value    : in std_logic_vector(27 downto 0);
     clk, reset_n : in std_logic;
     flag         : out std_logic
   );
 end delay9;
 
-architecture delays of delay8 is
-  signal count     : unsigned(23 downto 0);
-  signal max_count : unsigned(23 downto 0);
+architecture delays of delay9 is
+  signal count     : unsigned(27 downto 0);
+  signal max_count : unsigned(27 downto 0);
 begin
   max_count <= unsigned(max_value);
   process (clk, reset_n) is
