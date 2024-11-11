@@ -53,7 +53,7 @@ ARCHITECTURE test OF soda_tb IS
 
    -- Component Declaration for the Unit Under Test (UUT)
    -- if you use a package with the component defined then you do not need this
-   COMPONENT scrolling_display IS
+   COMPONENT lab9 IS
       PORT(clk_main, reset_main	         	: IN STD_LOGIC;
             S_main								: IN STD_LOGIC;
             -------------------------------------------------------------------
@@ -85,7 +85,7 @@ ARCHITECTURE test OF soda_tb IS
 BEGIN  -- test
 
    -- component instantiation
-   UUT : Scrolling_display
+   UUT : lab9
       PORT MAP (
 						clk_main    => clk_tb,
 						reset_main => reset_n_tb,

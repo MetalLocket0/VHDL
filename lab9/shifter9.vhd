@@ -13,7 +13,7 @@ end shifter9;
 architecture basis of shifter9 is
   constant I     : std_logic_vector(6 downto 0) := "1001111";
   constant C     : std_logic_vector(6 downto 0) := "1000110";
-  constant E     : std_logic_vector(6 downto 0) := "1000110";
+  constant E     : std_logic_vector(6 downto 0) := "0000110";
   constant L     : std_logic_vector(6 downto 0) := "1000111";
   constant d     : std_logic_vector(6 downto 0) := "1100001";
   constant A     : std_logic_vector(6 downto 0) := "0001000";
@@ -33,16 +33,14 @@ begin
     elsif (rising_edge(clk)) then
       if (enable = '1') then
         shift(0 to 22) <= shift(1 to 23);
-        shift(0)       <= shift(23);
-      else
-        shift <= ssd_array_c;
+        shift(23)       <= shift(0);
       end if;
     end if;
   end process;
-  HEX5 <= shift(23);
-  HEX4 <= shift(22);
-  HEX3 <= shift(21);
-  HEX2 <= shift(20);
-  HEX1 <= shift(19);
-  HEX0 <= shift(18);
+  HEX5 <= shift(0);
+  HEX4 <= shift(1);
+  HEX3 <= shift(2);
+  HEX2 <= shift(3);
+  HEX1 <= shift(4);
+  HEX0 <= shift(5);
 end architecture;
