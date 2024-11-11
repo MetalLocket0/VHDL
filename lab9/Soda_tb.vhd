@@ -54,10 +54,10 @@ ARCHITECTURE test OF soda_tb IS
    -- Component Declaration for the Unit Under Test (UUT)
    -- if you use a package with the component defined then you do not need this
    COMPONENT scrolling_display IS
-      PORT(clk, reset_n	         	: IN STD_LOGIC;
-            S								: IN STD_LOGIC;
+      PORT(clk_main, reset_main	         	: IN STD_LOGIC;
+            S_main								: IN STD_LOGIC;
             -------------------------------------------------------------------
-            HEX0, HEX1, HEX2, HEX3, HEX4, HEX5	: OUT STD_LOGIC_VECTOR(6 downto 0));
+            HEX0_MAIN, HEX1_MAIN, HEX2_MAIN, HEX3_MAIN, HEX4_MAIN, HEX5_MAIN	: OUT STD_LOGIC_VECTOR(6 downto 0));
    END COMPONENT;
 
    -- define signals for component ports
