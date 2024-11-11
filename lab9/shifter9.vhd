@@ -4,10 +4,10 @@ use ieee.numeric_std.all;
 
 entity shifter9 is
   port (
-    clk                          : in std_logic;
-    rst                          : in std_logic;
-    enable                       : in std_logic;
-    HEX0, HEX1, HEX2, HEX3, HEX4 : out std_logic_vector(6 downto 0));
+    clk                                : in std_logic;
+    rst                                : in std_logic;
+    enable                             : in std_logic;
+    HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : out std_logic_vector(6 downto 0));
 end shifter9;
 
 architecture basis of shifter9 is
@@ -33,16 +33,16 @@ begin
     elsif (rising_edge(clk)) then
       if (enable = '1') then
         shift(24 downto 1) <= shift(23 downto 0);
-      shift(0) <= shift(24);
+        shift(0)           <= shift(24);
       else
         shift <= ssd_array_type;
       end if;
     end if;
   end process;
-HEX5 <= shift(24);
-HEX4 <= shift(23);
-HEX3 <= shift(22);
-HEX2 <= shift(21);
-HEX1 <= shift(20);
-HEX0 <= shift(19);
+  HEX5 <= shift(24);
+  HEX4 <= shift(23);
+  HEX3 <= shift(22);
+  HEX2 <= shift(21);
+  HEX1 <= shift(20);
+  HEX0 <= shift(19);
 end architecture;
