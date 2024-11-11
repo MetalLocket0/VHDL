@@ -11,7 +11,6 @@ entity shifter9 is
 end shifter9;
 
 architecture basis of shifter9 is
-  signal shift   : std_logic_vector(0 downto 24);
   constant I     : std_logic_vector(6 downto 0) := "1001111";
   constant C     : std_logic_vector(6 downto 0) := "1000110";
   constant E     : std_logic_vector(6 downto 0) := "1000110";
@@ -25,14 +24,25 @@ architecture basis of shifter9 is
   constant BLANK : std_logic_vector(6 downto 0) := "1111111";
   type ssd_array_type is array (0 to 24) of std_logic_vector(6 downto 0);
   constant ssd_array_c : ssd_array_type := (I, C, E, BLANK, C, O, L, d, BLANK, S, O, d, A, BLANK, S, O, L, d, BLANK, H, E, r, E, BLANK);
+  signal shift         : ssd_array_type(0 to 24);
 begin
- shifter : process(clk, rst)
- begin
-  if (rst = '0') then
-    shift <= ssd_array_type;
-  elsif (rising_edge(clk)) then
-    if (enable = '1') then
-      shift <= ;
-    else
-
+  shifter : process (clk, rst)
+  begin
+    if (rst = '0') then
+      shift <= ssd_array_type;
+    elsif (rising_edge(clk)) then
+      if (enable = '1') then
+        shift(24 downto 1) <= shift(23 downto 0);
+      shift(0) <= shift(24);
+      else
+        shift <= ssd_array_type;
+      end if;
     end if;
+  end process;
+HEX5 <= shift(24);
+HEX4 <= shift(23);
+HEX3 <= shift(22);
+HEX2 <= shift(21);
+HEX1 <= shift(20);
+HEX0 <= shift(19);
+end architecture;
