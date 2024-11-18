@@ -15,6 +15,19 @@ architecture technique of lab10 is
   type state_type is (wait1, dime, nickel, quarter, enough, excess, vend, change);
   signal state, next_state : state_type;
   signal money             : unsigned(6 downto 0); -- max 127 cents 
+  signal tens_dig          : unsigned(6 downto 0);
+  signal ones_dig          : unsigned(6 downto 0);
+  constant ZERO            : std_logic_vector(6 downto 0) := "1000000";
+  constant ONE             : std_logic_vector(6 downto 0) := "1111001";
+  constant TWO             : std_logic_vector(6 downto 0) := "0100100";
+  constant THREE           : std_logic_vector(6 downto 0) := "0110000";
+  constant FOUR            : std_logic_vector(6 downto 0) := "0011001";
+  constant FIVE            : std_logic_vector(6 downto 0) := "0010010";
+  constant SIX             : std_logic_vector(6 downto 0) := "0000010";
+  constant SEVEN           : std_logic_vector(6 downto 0) := "1111000";
+  constant EIGHT           : std_logic_vector(6 downto 0) := "0000000";
+  constant NINE            : std_logic_vector(6 downto 0) := "0011000";
+  constant BLANK           : std_logic_vector(6 downto 0) := "1111111";
 begin
 
   sync : process (clk, reset)
@@ -138,4 +151,56 @@ begin
     end if;
   end process;
 
+  red_bull_out : process (state)
+  begin
+    if (state = vend) then
+      red_bull <= '1';
+    else
+      red_bull <= '0';
+    end if;
+  end process;
+
+  change_out : process (state)
+  begin
+    if (state = excess or state = change) then
+      change_back <= '1';
+    else
+      change_back <= '0';
+    end if;
+  end process;
+
+  tens_dig     <= ((money rem 100) / 10);
+  ones_dig     <= (money rem 10);
+
+  process (tens_dig, ones_dig)
+  begin
+
+    case tens_dig is
+      when "0000000" => HEX1 <= ZERO;
+      when "0000001" => HEX1 <= ONE;
+      when "0000010" => HEX1 <= TWO;
+      when "0000011" => HEX1 <= THREE;
+      when "0000100" => HEX1 <= FOUR;
+      when "0000101" => HEX1 <= FIVE;
+      when "0000110" => HEX1 <= SIX;
+      when "0000111" => HEX1 <= SEVEN;
+      when "0001000" => HEX1 <= EIGHT;
+      when "0001001" => HEX1 <= NINE;
+      when others    => HEX1    <= BLANK;
+    end case;
+
+    case ones_dig is
+      when "0000000" => HEX0 <= ZERO;
+      when "0000001" => HEX0 <= ONE;
+      when "0000010" => HEX0 <= TWO;
+      when "0000011" => HEX0 <= THREE;
+      when "0000100" => HEX0 <= FOUR;
+      when "0000101" => HEX0 <= FIVE;
+      when "0000110" => HEX0 <= SIX;
+      when "0000111" => HEX0 <= SEVEN;
+      when "0001000" => HEX0 <= EIGHT;
+      when "0001001" => HEX0 <= NINE;
+      when others    => HEX0    <= BLANK;
+    end case;
+  end process;
 end architecture;
