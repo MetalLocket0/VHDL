@@ -60,6 +60,8 @@ begin
         next_state <= wait1;
       elsif (money >= "1001011") then
         next_state <= enough;
+      else
+        next_state <= quarter;
       end if;
 
       when nickel =>
@@ -67,6 +69,8 @@ begin
         next_state <= wait1;
       elsif (money >= "1001011") then
         next_state <= enough;
+      else
+        next_state <= nickel;
       end if;
 
       when dime =>
@@ -74,6 +78,8 @@ begin
         next_state <= wait1;
       elsif (money >= "1001011") then
         next_state <= enough;
+      else
+        next_state <= dime;
       end if;
 
       when change =>
@@ -104,7 +110,7 @@ begin
       when vend =>
       if (money > "0000000") then
         next_state <= change;
-      elsif (state = vend) then
+      else
         next_state <= wait1;
       end if;
 
