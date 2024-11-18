@@ -43,9 +43,7 @@ begin
   begin
     case(state) is
       when wait1 =>
-      if (state = wait1) then
-        next_state <= wait1;
-      elsif (quarter_in = '1') then
+      if (quarter_in = '1') then
         next_state <= quarter;
       elsif (nickel_in = '1') then
         next_state <= nickel;
@@ -53,6 +51,8 @@ begin
         next_state <= dime;
       elsif (coin_return = '1') then
         next_state <= change;
+      else
+        next_state <= wait1;
       end if;
 
       when quarter =>
@@ -80,25 +80,25 @@ begin
       next_state <= wait1;
 
       when enough =>
-      if (state = enough) then
-        next_state <= enough;
-      elsif (dispense = '1') then
+      if (dispense = '1') then
         next_state <= vend;
       elsif (dime_in = '1' or nickel_in = '1' or quarter_in = '1') then
         next_state <= excess;
       elsif (coin_return = '1') then
         next_state <= change;
+      else
+        next_state <= enough;
       end if;
 
       when excess =>
-      if (state = excess) then
-        next_state <= enough;
-      elsif (dime_in = '1' or nickel_in = '1' or quarter_in = '1') then
+      if (dime_in = '1' or nickel_in = '1' or quarter_in = '1') then
         next_state <= excess;
       elsif (dispense = '1') then
         next_state <= vend;
       elsif (coin_return = '1') then
         next_state <= change;
+      else
+        next_state <= enough;
       end if;
 
       when vend =>
@@ -169,8 +169,8 @@ begin
     end if;
   end process;
 
-  tens_dig     <= ((money rem 100) / 10);
-  ones_dig     <= (money rem 10);
+  tens_dig <= ((money rem 100) / 10);
+  ones_dig <= (money rem 10);
 
   process (tens_dig, ones_dig)
   begin
