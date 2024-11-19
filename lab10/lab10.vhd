@@ -56,30 +56,30 @@ begin
       end if;
 
       when quarter =>
-      if (money < "1001011") then -- 75 cents
+      if (money < 75) then -- 75 cents
         next_state <= wait1;
-      elsif (money >= "1001011") then
+      elsif (money >= 75) then
         next_state <= enough;
       else
-        next_state <= quarter;
+        next_state <= wait1;
       end if;
 
       when nickel =>
-      if (money < "1001011") then -- 75 cents
+      if (money < 75) then -- 75 cents
         next_state <= wait1;
-      elsif (money >= "1001011") then
+      elsif (money >= 75) then
         next_state <= enough;
       else
-        next_state <= nickel;
+        next_state <= wait1;
       end if;
 
       when dime =>
-      if (money < "1001011") then -- 75 cents
+      if (money < 75) then -- 75 cents
         next_state <= wait1;
-      elsif (money >= "1001011") then
+      elsif (money >= 75) then
         next_state <= enough;
       else
-        next_state <= dime;
+        next_state <= wait1;
       end if;
 
       when change =>
@@ -92,6 +92,8 @@ begin
         next_state <= excess;
       elsif (coin_return = '1') then
         next_state <= change;
+	   elsif (coin_return = '0' or dispense = '0') then
+			next_state <= enough;
       else
         next_state <= enough;
       end if;
@@ -108,7 +110,7 @@ begin
       end if;
 
       when vend =>
-      if (money > "0000000") then
+      if (money >= "0000000") then
         next_state <= change;
       else
         next_state <= wait1;
@@ -137,7 +139,7 @@ begin
         money <= (money + "0000101"); -- 5
 
         when quarter =>
-        money <= (money + "0001001"); -- 25
+        money <= (money + "0011001"); -- 25
 
         when enough =>
         money <= money;
