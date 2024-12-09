@@ -43,4 +43,5 @@ begin
   HEX2 <= shift(3);
   HEX1 <= shift(4);
   HEX0 <= shift(5);
+  -- end of code
 end architecture;
